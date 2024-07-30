@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>WhatToDoNotes</title>
+    <link rel="stylesheet" href="/common.css">
+</head>
+<body>
+<div th:replace="~{fragments.html :: navbar}"></div>
+
+<div id="content">
+    <form method="get">
+        <label>
+            <input type="text" name="pattern" th:text="${pattern}">
+            <input type="submit" value="Search" class="button">
+        </label>
+    </form>
+
+    <div class="note" th:each="note : ${notes}">
+        <div class="note-title" th:text="${note.getTitle()}"></div>
+        <div class="note-content" th:text="${note.getContent()}"></div>
+        <div class="note-status" th:text="${note.getStatus()}"></div>
+    </div>
+</div>
+
+</body>
+</html>

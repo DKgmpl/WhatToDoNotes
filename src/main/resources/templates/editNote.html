@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Edytuj Notatkę</title>
+    <link rel="stylesheet" href="/common.css">
+</head>
+<body>
+<div th:replace="~{fragments.html :: navbar}"></div>
+
+<h1>Edytuj Notatkę</h1>
+
+<form method="post" th:action="@{/notes/edit/{id}(id=${note.id})}" th:object="${note}">
+    <div>
+        <label>Tytuł:
+            <input type="text" th:field="*{title}"/>
+        </label>
+    </div>
+    <div>
+        <label>Treść:
+            <textarea th:field="*{content}"></textarea>
+        </label>
+    </div>
+    <div>
+        <label>Status:
+            <input type="text" th:field="*{status}"/>
+        </label>
+    </div>
+    <div>
+        <button type="submit">Zapisz</button>
+    </div>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="navbar" th:fragment="navbar">
+
+    <div id="logo">
+        <a href="/">
+            <img src="/logo_alpha.png" alt="LOGO">
+        </a>
+    </div>
+
+    <h1>WhatToDoNotes</h1>
+
+    <div id="menu">
+        <a href="/">Main</a>
+        <a href="/login" th:if="${session.user == null}">Login</a>
+        <a href="/logout" th:if="${session.user != null}">Logout</a>
+        <a href="/register">Register</a>
+        <a href="/note/add" th:if="${session.user?.getRole() == T(pl.edu.wszib.what.todo.notes.model.User.Role).ADMIN}" class="button">Dodaj Notatkę</a>
+    </div>
+</div>
+
+
+</body>
+</html>
