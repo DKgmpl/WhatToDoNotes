@@ -7,20 +7,20 @@
 <body>
 
 <div id="navbar" th:fragment="navbar">
-
-    <div id="logo">
-        <a href="/">
-            <img src="/logo_alpha.png" alt="LOGO">
-        </a>
-    </div>
-
-    <h1>WhatToDoNotes</h1>
+        <div id="title-and-logo">
+            <h1>WhatToDoNotes</h1>
+            <div id="logo">
+                <a href="/">
+                    <img src="/logo_alpha.png" alt="LOGO">
+                </a>
+            </div>
+        </div>
 
     <div id="menu">
         <a href="/">Główna</a>
         <a href="/login" th:if="${session.user == null}">Zaloguj</a>
         <a href="/logout" th:if="${session.user != null}">Wyloguj</a>
-        <a href="/register">Rejestracja</a>
+        <a href="/register" th:if="${session.user == null}">Zarejestruj</a>
 <!--    Gdy user z rolą ADMIN istnieje to wyświetl    -->
 <!--    th:if="${session.user?.getRole() == T(pl.edu.wszib.what.todo.notes.model.User.Role).ADMIN}"-->
         <a href="/note/add"  th:if="${session.user != null}" class="button">Dodaj Notatkę</a>

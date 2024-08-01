@@ -15,6 +15,7 @@ public class NoteRepository implements INoteDAO {
 
     public NoteRepository(IdSequence idSequence) {
         this.idSequence = new IdSequence();
+        this.notes.add(new Note(this.idSequence.getId(), "Przykładowa Notatka", "Przykładowy opis w notatce", "WAŻNEEE"));
     }
 
     @Override

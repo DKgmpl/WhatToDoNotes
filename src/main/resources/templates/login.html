@@ -2,28 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Logowanie</title>
     <link rel="stylesheet" href="/common.css">
+    <link rel="stylesheet" href="/login.css">
+    <script src="/loginValidator.js"></script>
 </head>
 <body>
 <div th:replace="~{fragments.html :: navbar}"></div>
-
-<h1>Login</h1>
-<form id="login-form" method="post">
-    <div>
-        <p th:if="${loginInfo != null}" th:text="${loginInfo}"></p>
-        <label>Login:
-        <input type="text" name="login"/>
-        </label>
-    </div>
-    <div>
-        <label>Password:
-        <input type="password" name="password"/>
-        </label>
-    </div>
-    <div>
-        <button type="submit">Login</button>
-    </div>
-</form>
+<div id="login-content">
+    <h1>Logowanie</h1>
+    <form id="login-form" method="post" onsubmit="validateLogin()">
+        <div>
+            <p th:if="${loginInfo != null}" th:text="${loginInfo}"></p>
+            <label>Login:
+                <input type="text" placeholder="login" name="login" id="login-field"/>
+            </label>
+        </div>
+        <div>
+            <label>Hasło:
+                <input type="password" placeholder="pass" name="password" id="pass-field"/>
+            </label>
+        </div>
+        <div>
+            <button type="submit">Login</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>

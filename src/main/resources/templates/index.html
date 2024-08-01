@@ -21,6 +21,7 @@
         <div class="note-content" th:text="${note.getContent()}"></div>
         <div class="note-status" th:text="${note.getStatus()}"></div>
         <a th:href="@{/note/edit/{id}(id=${note.id})}" th:if="${session.user != null}">Edytuj</a>
+        <a href="/" th:if="${session.user != null}">Usuń</a>
     </div>
 </div>
 
