@@ -9,17 +9,18 @@
 <div th:replace="~{fragments.html :: navbar}"></div>
 
 <div id="content">
-    <form method="get">
+    <form id="search-bar" method="get">
         <label>
             <input type="text" name="pattern" th:text="${pattern}">
             <input type="submit" value="Search" class="button">
         </label>
     </form>
 
-    <div class="note" th:each="note : ${notes}">
+    <div id="note-container" class="note" th:if="${session.user != null}" th:each="note : ${notes}">
         <div class="note-title" th:text="${note.getTitle()}"></div>
         <div class="note-content" th:text="${note.getContent()}"></div>
         <div class="note-status" th:text="${note.getStatus()}"></div>
+        <a th:href="@{/note/edit/{id}(id=${note.id})}" th:if="${session.user != null}">Edytuj</a>
     </div>
 </div>
 

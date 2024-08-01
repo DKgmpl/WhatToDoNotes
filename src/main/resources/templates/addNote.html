@@ -8,24 +8,25 @@
 <body>
 <div th:replace="~{fragments.html :: navbar}"></div>
 <h1>Dodaj Notatkę</h1>
-<form id="note-form" method="post" th:action="@{/note/add}">
+<form id="note-form" method="post">
+<!--    th:action="@{/note/add}"-->
     <div>
-        <label>Tytuł:
-            <input type="text" placeholder="Tytuł" class="text-field" th:field="*{singularNote.title}"/>
+        <label>
+            <input type="text" placeholder="Tytuł" class="text-field" th:field="*{noteModel.title}"/>
         </label>
     </div>
     <div>
-        <label>Treść:
-            <textarea placeholder="Napisz coś!" class="textarea-field" th:field="*{singularNote.content}"></textarea>
+        <label>
+            <textarea placeholder="Napisz coś!" class="textarea-field" th:field="*{noteModel.content}"></textarea>
         </label>
     </div>
     <div>
-        <label>Status:
-            <input type="text" placeholder="Status notatki" class="text-field" th:field="*{singularNote.status}"/>
+        <label>
+            <input type="text" placeholder="Status notatki" class="text-field" th:field="*{noteModel.status}"/>
         </label>
     </div>
     <div>
-        <button type="submit">Dodaj</button>
+        <button type="submit" value="ok" class="button">Zapisz</button>
     </div>
 </form>
 

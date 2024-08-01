@@ -16,11 +16,9 @@ public class CommonController {
 
     @Autowired
     HttpSession httpSession;
-//    private final IUserDAO userDAO;
 
     public CommonController(INoteDAO noteDAO, HttpSession httpSession) {
         this.noteDAO = noteDAO;
-//        this.userDAO = userDAO;
         this.httpSession = httpSession;
     }
 

@@ -43,7 +43,7 @@ public class AuthenticationController {
             System.out.println("Logged in");
             return "redirect:/";
         }
-        this.httpSession.setAttribute("loginInfo", "złe dane");
+        this.httpSession.setAttribute("loginInfo", "Złe dane");
         System.out.println("Not logged in, try again");
         return "redirect:/login";
     }

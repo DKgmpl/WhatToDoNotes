@@ -17,11 +17,13 @@
     <h1>WhatToDoNotes</h1>
 
     <div id="menu">
-        <a href="/">Main</a>
-        <a href="/login" th:if="${session.user == null}">Login</a>
-        <a href="/logout" th:if="${session.user != null}">Logout</a>
-        <a href="/register">Register</a>
-        <a href="/note/add" th:if="${session.user?.getRole() == T(pl.edu.wszib.what.todo.notes.model.User.Role).ADMIN}" class="button">Dodaj Notatkę</a>
+        <a href="/">Główna</a>
+        <a href="/login" th:if="${session.user == null}">Zaloguj</a>
+        <a href="/logout" th:if="${session.user != null}">Wyloguj</a>
+        <a href="/register">Rejestracja</a>
+<!--    Gdy user z rolą ADMIN istnieje to wyświetl    -->
+<!--    th:if="${session.user?.getRole() == T(pl.edu.wszib.what.todo.notes.model.User.Role).ADMIN}"-->
+        <a href="/note/add"  th:if="${session.user != null}" class="button">Dodaj Notatkę</a>
     </div>
 </div>
 

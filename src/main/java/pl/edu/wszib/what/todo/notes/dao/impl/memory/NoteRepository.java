@@ -62,6 +62,7 @@ public class NoteRepository implements INoteDAO {
             });
     }
 
+    // Funkcja kopiująca powtarzalny fragment dla getById i getByPattern
     private Note copy(Note note) {
         Note copy = new Note();
         copy.setId(note.getId());
