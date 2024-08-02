@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.edu.wszib.what.todo.notes.exceptions.RegisterValidationExemption;
 import pl.edu.wszib.what.todo.notes.services.IAuthenticationService;
+import pl.edu.wszib.what.todo.notes.session.SessionConstants;
 import pl.edu.wszib.what.todo.notes.validators.RegisterValidator;
 
 @Controller
@@ -33,7 +34,7 @@ public class AuthenticationController {
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public String login2(@RequestParam String login, @RequestParam String password) {
         this.authenticationService.login(login, password);
-        if (this.httpSession.getAttribute("user") != null) {
+        if (this.httpSession.getAttribute(SessionConstants.USER_KEY) != null) {
             return "redirect:/";
         }
         return "redirect:/login";
@@ -58,7 +59,7 @@ public class AuthenticationController {
             return "redirect:/register?error=" + e.getMessage();
         }
         this.authenticationService.register(name, surname, login, password);
-        if (this.httpSession.getAttribute("user") != null) {
+        if (this.httpSession.getAttribute(SessionConstants.USER_KEY) != null) {
             return "redirect:/";
         }
         return "redirect:/register";

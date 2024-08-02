@@ -6,6 +6,7 @@ import org.springframework.util.DigestUtils;
 import pl.edu.wszib.what.todo.notes.dao.impl.IUserDAO;
 import pl.edu.wszib.what.todo.notes.model.User;
 import pl.edu.wszib.what.todo.notes.services.IAuthenticationService;
+import pl.edu.wszib.what.todo.notes.session.SessionConstants;
 
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class AuthenticationService implements IAuthenticationService {
         Optional<User> user = this.userDAO.getByLogin(login);
         if (user.isPresent() &&
                 DigestUtils.md5DigestAsHex(password.getBytes()).equals(user.get().getPassword())) {
-            httpSession.setAttribute("user", user.get());
+            httpSession.setAttribute(SessionConstants.USER_KEY, user.get());
             System.out.println("Logged in");
             return;
         }
@@ -54,7 +55,7 @@ public class AuthenticationService implements IAuthenticationService {
 
     @Override
     public void logout() {
-        this.httpSession.removeAttribute("user");
+        this.httpSession.removeAttribute(SessionConstants.USER_KEY);
         System.out.println("Logged out" + this.userDAO.getByLogin(toString()));
     }
 

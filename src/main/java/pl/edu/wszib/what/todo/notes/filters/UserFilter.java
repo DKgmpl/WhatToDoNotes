@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import pl.edu.wszib.what.todo.notes.model.User;
+import pl.edu.wszib.what.todo.notes.session.SessionConstants;
 
 import java.io.IOException;
 
@@ -19,7 +20,7 @@ public class UserFilter implements Filter {
 
         HttpSession httpSession = req.getSession();
 
-        if (httpSession == null || !(httpSession.getAttribute("user") instanceof User)) {
+        if (httpSession == null || !(httpSession.getAttribute(SessionConstants.USER_KEY) instanceof User)) {
             res.sendRedirect("/");
         }
         chain.doFilter(request, response);
