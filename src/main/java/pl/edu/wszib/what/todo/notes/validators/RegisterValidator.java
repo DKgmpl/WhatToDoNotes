@@ -29,5 +29,4 @@ public class RegisterValidator {
             throw new RegisterValidationExemption();
         }
     }
-
 }

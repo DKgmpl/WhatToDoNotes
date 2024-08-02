@@ -1,6 +1,5 @@
 package pl.edu.wszib.what.todo.notes.dao.impl.memory;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import pl.edu.wszib.what.todo.notes.dao.impl.INoteDAO;
 import pl.edu.wszib.what.todo.notes.model.Note;

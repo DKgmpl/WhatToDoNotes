@@ -1,6 +1,5 @@
 package pl.edu.wszib.what.todo.notes.validators;
 
-
 import pl.edu.wszib.what.todo.notes.exceptions.NoteValidationExemption;
 
 public class NoteValidator {

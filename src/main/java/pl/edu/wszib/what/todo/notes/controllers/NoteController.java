@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import pl.edu.wszib.what.todo.notes.dao.impl.INoteDAO;
 import pl.edu.wszib.what.todo.notes.exceptions.NoteValidationExemption;
 import pl.edu.wszib.what.todo.notes.model.Note;
 import pl.edu.wszib.what.todo.notes.services.INoteService;
@@ -22,7 +21,7 @@ public class NoteController {
 
     private final HttpSession httpSession;
 
-    public NoteController(INoteDAO noteDAO, INoteService noteService, HttpSession httpSession) {
+    public NoteController(INoteService noteService, HttpSession httpSession) {
         this.noteService = noteService;
         this.httpSession = httpSession;
     }
@@ -35,9 +34,6 @@ public class NoteController {
 
     @RequestMapping(path = "/note/add", method = RequestMethod.POST)
     public String add2(@ModelAttribute Note note) {
-        if (this.httpSession.getAttribute("user") == null) {
-            return "redirect:/";
-        }
         try {
             NoteValidator.validateTitle(note.getTitle());
             NoteValidator.validateContent(note.getContent());
@@ -52,9 +48,6 @@ public class NoteController {
 
     @RequestMapping(path = "/note/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable int id, Model model) {
-        if (this.httpSession.getAttribute("user") == null) {
-            return "redirect:/";
-        }
         Optional<Note> noteBox = this.noteService.getById(id);
         if (noteBox.isEmpty()) {
             return "redirect:/";
@@ -66,9 +59,6 @@ public class NoteController {
 
     @RequestMapping(path = "/note/edit/{id}", method = RequestMethod.POST)
     public String edit2(@ModelAttribute Note note, @PathVariable int id) {
-        if (this.httpSession.getAttribute("user") == null) {
-            return "redirect:/";
-        }
         try {
             NoteValidator.validateTitle(note.getTitle());
             NoteValidator.validateContent(note.getContent());

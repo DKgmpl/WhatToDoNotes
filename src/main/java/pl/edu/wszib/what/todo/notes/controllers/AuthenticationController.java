@@ -32,7 +32,6 @@ public class AuthenticationController {
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public String login2(@RequestParam String login, @RequestParam String password) {
-        // WALIDACJA LOGINU (DANE WEJSCIOWE)
         this.authenticationService.login(login, password);
         if (this.httpSession.getAttribute("user") != null) {
             return "redirect:/";
@@ -60,7 +59,7 @@ public class AuthenticationController {
         }
         this.authenticationService.register(name, surname, login, password);
         if (this.httpSession.getAttribute("user") != null) {
-            return "redirect:/login";
+            return "redirect:/";
         }
         return "redirect:/register";
     }

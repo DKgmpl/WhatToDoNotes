@@ -1,10 +1,9 @@
 package pl.edu.wszib.what.todo.notes.dao.impl.memory;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.DigestUtils;
 import pl.edu.wszib.what.todo.notes.dao.impl.IUserDAO;
-import pl.edu.wszib.what.todo.notes.exceptions.LoginAllreadyExistExemption;
+import pl.edu.wszib.what.todo.notes.exceptions.LoginAlreadyExistExemption;
 import pl.edu.wszib.what.todo.notes.model.User;
 
 import java.util.ArrayList;
@@ -51,7 +50,7 @@ public class UserRepository implements IUserDAO {
     public void save(User user) {
         user.setId(this.idSequence.getId());
         this.getByLogin(user.getLogin()).ifPresent(u -> {
-            throw new LoginAllreadyExistExemption();
+            throw new LoginAlreadyExistExemption();
         });
         this.users.add(user);
     }
