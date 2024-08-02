@@ -20,15 +20,16 @@ public class NoteService implements INoteService {
     @Override
     public void save(Note note) {
         this.noteDAO.save(note);
+
     }
 
     @Override
-    public Optional<Note> getById(int id) {
+    public Optional<Note> getById(Long id) {
         return this.noteDAO.getById(id);
     }
 
     @Override
-    public void update(Note note, int id) {
+    public void update(Note note, Long id) {
         note.setId(id);
         this.noteDAO.update(note);
     }

@@ -1,6 +1,5 @@
 package pl.edu.wszib.what.todo.notes.dao.impl.memory;
 
-import org.springframework.stereotype.Repository;
 import org.springframework.util.DigestUtils;
 import pl.edu.wszib.what.todo.notes.dao.impl.IUserDAO;
 import pl.edu.wszib.what.todo.notes.exceptions.LoginAlreadyExistExemption;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 public class UserRepository implements IUserDAO {
 
     private final List<User> users = new ArrayList<>();
@@ -19,16 +17,16 @@ public class UserRepository implements IUserDAO {
 
     public UserRepository(IdSequence idSequence) {
         this.idSequence = idSequence;
-        this.users.add(new User(this.idSequence.getId(), "Master","Admin","admin",DigestUtils.md5DigestAsHex
+        this.users.add(new User((long) this.idSequence.getId(), "Master","Admin","admin",DigestUtils.md5DigestAsHex
                 ("admin123".getBytes()), User.Role.ADMIN));
-        this.users.add(new User(this.idSequence.getId(), "Jan","Kowalski","jan", DigestUtils.md5DigestAsHex
+        this.users.add(new User((long) this.idSequence.getId(), "Jan","Kowalski","jan", DigestUtils.md5DigestAsHex
                 ("jan123".getBytes()), User.Role.USER));
     }
 
     @Override
-    public Optional<User> getById(final int id) {
+    public Optional<User> getById(final Long id) {
         return this.users.stream()
-                .filter(user -> user.getId() == id)
+                .filter(user -> user.getId().equals(id))
                 .findFirst()
                 .map(this::copy);
     }
@@ -48,7 +46,7 @@ public class UserRepository implements IUserDAO {
 
     @Override
     public void save(User user) {
-        user.setId(this.idSequence.getId());
+        user.setId((long) this.idSequence.getId());
         this.getByLogin(user.getLogin()).ifPresent(u -> {
             throw new LoginAlreadyExistExemption();
         });
@@ -56,14 +54,14 @@ public class UserRepository implements IUserDAO {
     }
 
     @Override
-    public void delete(final int id) {
-        this.users.removeIf(user -> user.getId() == id);
+    public void delete(final Long id) {
+        this.users.removeIf(user -> user.getId().equals(id));
     }
 
     @Override
     public void update(User user) {
         this.users.stream()
-                .filter(u -> u.getId() == user.getId())
+                .filter(u -> u.getId().equals(user.getId()))
                 .findAny()
                 .ifPresent(u -> {
             u.setName(user.getName());

@@ -4,14 +4,14 @@ import pl.edu.wszib.what.todo.notes.exceptions.RegisterValidationExemption;
 
 public class RegisterValidator {
     public static void validateName(String name) {
-        String nameSurnameRegex = "^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]*$\n";
+        String nameSurnameRegex = "^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]*$";
         if (!name.matches(nameSurnameRegex) || name.length() < 3 || name.length() > 57) {
             throw new RegisterValidationExemption();
         }
     }
 
     public static void validateSurname(String surname) {
-        String nameSurnameRegex = "^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]*$\n";
+        String nameSurnameRegex = "^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]*$";
         if (!surname.matches(nameSurnameRegex) || surname.length() < 2 || surname.length() > 35) {
             throw new RegisterValidationExemption();
         }

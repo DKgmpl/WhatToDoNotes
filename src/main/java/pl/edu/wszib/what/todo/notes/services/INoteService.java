@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public interface INoteService {
     void save(Note note);
-    Optional<Note> getById(int id);
-    void update(Note note, int id);
+    Optional<Note> getById(Long id);
+    void update(Note note, Long id);
     void delete(Note note);
     List<Note> getAll();
     List<Note> getByPattern(String pattern);

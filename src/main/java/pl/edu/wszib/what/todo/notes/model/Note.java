@@ -1,5 +1,6 @@
 package pl.edu.wszib.what.todo.notes.model;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 @AllArgsConstructor
@@ -7,9 +8,24 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
+@Entity (name = "tnote")
 public class Note {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String title;
     private String content;
     private String status;
+    @Enumerated(EnumType.STRING)
+    private Priority priority;
+
+    public Note(Long id) {
+        this.id = id;
+    }
+
+    public enum Priority {
+        LOW,
+        MEDIUM,
+        HIGH
+    }
 }

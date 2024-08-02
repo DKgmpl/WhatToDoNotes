@@ -30,7 +30,15 @@
             </label>
         </div>
         <div>
-            <button type="submit" value="ok" class="button">Zapisz</button>
+            <label for="priority">Priorytet:</label>
+            <select id="priority" th:field="*{noteModel.priority}">
+                <option value="LOW">Low</option>
+                <option value="MEDIUM">Medium</option>
+                <option value="HIGH">High</option>
+            </select>
+        </div>
+        <div>
+            <button type="submit" class="button">Zapisz</button>
         </div>
     </form>
 </div>

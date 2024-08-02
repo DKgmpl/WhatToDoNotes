@@ -7,11 +7,11 @@ import java.util.Optional;
 
 public interface INoteDAO {
 
-    Optional<Note> getById(int id);
+    Optional<Note> getById(Long id);
     List<Note> getAll();
     List<Note> getByPattern(String pattern);
 
     void save(Note note);
-    void delete(int id);
+    void delete(Long id);
     void update(Note note);
 }

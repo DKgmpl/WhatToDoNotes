@@ -20,6 +20,7 @@
         <div class="note-title" th:text="${note.getTitle()}"></div>
         <div class="note-content" th:text="${note.getContent()}"></div>
         <div class="note-status" th:text="${note.getStatus()}"></div>
+        <div class="note-priority" th:text="${note.getPriority()}"></div>
         <a th:href="@{/note/edit/{id}(id=${note.id})}" th:if="${session.user != null}">Edytuj</a>
         <a href="/" th:if="${session.user != null}">Usuń</a>
     </div>

@@ -1,12 +1,10 @@
 package pl.edu.wszib.what.todo.notes.dao.impl.memory;
 
-import org.springframework.stereotype.Repository;
 import pl.edu.wszib.what.todo.notes.dao.impl.INoteDAO;
 import pl.edu.wszib.what.todo.notes.model.Note;
 
 import java.util.*;
 
-@Repository
 public class NoteRepository implements INoteDAO {
 
     List<Note> notes = new ArrayList<>();
@@ -15,13 +13,14 @@ public class NoteRepository implements INoteDAO {
 
     public NoteRepository(IdSequence idSequence) {
         this.idSequence = new IdSequence();
-        this.notes.add(new Note(this.idSequence.getId(), "Przykładowa Notatka", "Przykładowy opis w notatce", "WAŻNEEE"));
+        this.notes.add(new Note((long) this.idSequence.getId(),
+                "Przykładowa Notatka", "Przykładowy opis w notatce", "WAŻNEEE", Note.Priority.LOW));
     }
 
     @Override
-    public Optional<Note> getById(final int id) {
+    public Optional<Note> getById(final Long id) {
         return this.notes.stream()
-                .filter(note -> note.getId() == id)
+                .filter(note -> note.getId().equals(id))
                 .findFirst()
                 .map(this::copy);
     }
@@ -42,19 +41,19 @@ public class NoteRepository implements INoteDAO {
 
     @Override
     public void save(Note note) {
-        note.setId(this.idSequence.getId());
+        note.setId((long) this.idSequence.getId());
         notes.add(note);
     }
 
     @Override
-    public void delete(int id) {
-        this.notes.removeIf(note -> note.getId() == id);
+    public void delete(Long id) {
+        this.notes.removeIf(note -> note.getId().equals(id));
     }
 
     @Override
     public void update(final Note note) {
             this.notes.stream()
-                    .filter(b -> b.getId() == (note.getId()))
+                    .filter(b -> Objects.equals(b.getId(), note.getId()))
                     .findAny()
                     .ifPresent(b -> {
                 b.setTitle(note.getTitle());

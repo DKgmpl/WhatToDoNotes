@@ -44,7 +44,7 @@ public class NoteController {
     }
 
     @RequestMapping(path = "/edit/{id}", method = RequestMethod.GET)
-    public String edit(@PathVariable int id, Model model) {
+    public String edit(@PathVariable Long id, Model model) {
         Optional<Note> noteBox = this.noteService.getById(id);
         if (noteBox.isEmpty()) {
             return "redirect:/";
@@ -55,7 +55,7 @@ public class NoteController {
     }
 
     @RequestMapping(path = "/edit/{id}", method = RequestMethod.POST)
-    public String edit2(@ModelAttribute Note note, @PathVariable int id) {
+    public String edit2(@ModelAttribute Note note, @PathVariable Long id) {
         try {
             NoteValidator.validateTitle(note.getTitle());
             NoteValidator.validateContent(note.getContent());
