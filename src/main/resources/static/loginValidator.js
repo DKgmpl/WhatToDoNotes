@@ -5,14 +5,7 @@ function validateLogin() {
 
     let regex = /^[A-Za-z0-9]{4,}$;
 
-    if (regex.test(loginField.value)) {
-        return false;
-
-    }
-
-    if (!regex.test(passField.value)) {
-        return false;
-    }
-
-    return true;
+    // Bramka NOR dla sprawdzenia poprawności loginu i hasła
+    // !(!A || !B)
+    return !(!regex.test(loginField.value) || !regex.test(passField.value));
 }
