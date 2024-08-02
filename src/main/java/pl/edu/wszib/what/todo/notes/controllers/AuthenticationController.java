@@ -4,9 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import pl.edu.wszib.what.todo.notes.exceptions.RegisterValidationExemption;
 import pl.edu.wszib.what.todo.notes.services.IAuthenticationService;
 import pl.edu.wszib.what.todo.notes.session.SessionConstants;
@@ -25,13 +23,13 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
 
-    @RequestMapping(path = "/login", method = RequestMethod.GET)
+    @GetMapping(path = "/login")
     public String login(Model model) {
         model.addAttribute("loginInfo", this.authenticationService.getLoginInfo());
         return "login";
     }
 
-    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    @PostMapping(path = "/login")
     public String login2(@RequestParam String login, @RequestParam String password) {
         this.authenticationService.login(login, password);
         if (this.httpSession.getAttribute(SessionConstants.USER_KEY) != null) {
@@ -40,13 +38,13 @@ public class AuthenticationController {
         return "redirect:/login";
     }
 
-    @RequestMapping(path = "/register", method = RequestMethod.GET)
+    @GetMapping(path = "/register")
     public String register(Model model) {
         model.addAttribute("registerInfo", this.authenticationService.getRegisterInfo());
         return "/register";
     }
 
-    @RequestMapping(path = "/register", method = RequestMethod.POST)
+    @PostMapping(path = "/register")
     public String register2(@RequestParam String name, @RequestParam String surname,
                             @RequestParam String login, @RequestParam String password) {
         try {
@@ -65,7 +63,7 @@ public class AuthenticationController {
         return "redirect:/register";
     }
 
-    @RequestMapping(path = "/logout", method = RequestMethod.GET)
+    @GetMapping(path = "/logout")
     public String logout() {
         this.authenticationService.logout();
         return "redirect:/";

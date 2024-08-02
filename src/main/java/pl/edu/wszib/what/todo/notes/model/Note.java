@@ -16,16 +16,8 @@ public class Note {
     private String title;
     private String content;
     private String status;
-    @Enumerated(EnumType.STRING)
-    private Priority priority;
 
     public Note(Long id) {
         this.id = id;
-    }
-
-    public enum Priority {
-        LOW,
-        MEDIUM,
-        HIGH
     }
 }

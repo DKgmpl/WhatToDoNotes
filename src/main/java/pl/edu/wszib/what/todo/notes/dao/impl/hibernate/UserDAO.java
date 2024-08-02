@@ -55,7 +55,8 @@ public class UserDAO implements IUserDAO {
     @Override
     public List<User> getAll() {
         Session session = this.sessionFactory.openSession();
-        Query<User> query = session.createQuery("FROM pl.edu.wszib.what.todo.notes.model.User", User.class);
+        Query<User> query =
+                session.createQuery("FROM pl.edu.wszib.what.todo.notes.model.User", User.class);
         List<User> result = query.getResultList();
         session.close();
         return result;

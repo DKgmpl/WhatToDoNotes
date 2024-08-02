@@ -24,6 +24,6 @@ public class DataInitialization implements CommandLineRunner {
                 ("jan123".getBytes()), User.Role.USER));
 
         this.noteDAO.save(new Note(null,
-                "Przykładowa Notatka", "Przykładowy opis w notatce", "WAŻNEEE", Note.Priority.LOW));
+                "Przykładowa Notatka", "Przykładowy opis w notatce", "WAŻNEEE"));
     }
 }

@@ -23,7 +23,8 @@ public class NoteDAO implements INoteDAO {
     @Override
     public Optional<Note> getById(Long id) {
         Session session = sessionFactory.openSession();
-        Query<Note> query = session.createQuery("FROM pl.edu.wszib.what.todo.notes.model.Note WHERE id = :id", Note.class);
+        Query<Note> query =
+                session.createQuery("FROM pl.edu.wszib.what.todo.notes.model.Note WHERE id = :id", Note.class);
         query.setParameter("id", id);
         try {
             Note note = query.getSingleResult();
@@ -38,7 +39,8 @@ public class NoteDAO implements INoteDAO {
     @Override
     public List<Note> getAll() {
         Session session = sessionFactory.openSession();
-        Query<Note> query = session.createQuery("FROM pl.edu.wszib.what.todo.notes.model.Note", Note.class);
+        Query<Note> query =
+                session.createQuery("FROM pl.edu.wszib.what.todo.notes.model.Note", Note.class);
         List<Note> note = query.getResultList();
         session.close();
         return note;

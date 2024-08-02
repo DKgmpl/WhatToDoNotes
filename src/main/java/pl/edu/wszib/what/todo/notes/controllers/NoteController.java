@@ -2,10 +2,7 @@ package pl.edu.wszib.what.todo.notes.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import pl.edu.wszib.what.todo.notes.exceptions.NoteValidationExemption;
 import pl.edu.wszib.what.todo.notes.model.Note;
 import pl.edu.wszib.what.todo.notes.services.INoteService;
@@ -23,13 +20,13 @@ public class NoteController {
         this.noteService = noteService;
     }
 
-    @RequestMapping(path = "/add", method = RequestMethod.GET)
+    @GetMapping(path = "/add")
     public String add(Model model) {
         model.addAttribute("noteModel", new Note());
         return "noteForm";
     }
 
-    @RequestMapping(path = "/add", method = RequestMethod.POST)
+    @PostMapping(path = "/add")
     public String add2(@ModelAttribute Note note) {
         try {
             NoteValidator.validateTitle(note.getTitle());
@@ -43,7 +40,7 @@ public class NoteController {
         return "redirect:/";
     }
 
-    @RequestMapping(path = "/edit/{id}", method = RequestMethod.GET)
+    @GetMapping(path = "/edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
         Optional<Note> noteBox = this.noteService.getById(id);
         if (noteBox.isEmpty()) {
@@ -54,7 +51,7 @@ public class NoteController {
         return "noteForm";
     }
 
-    @RequestMapping(path = "/edit/{id}", method = RequestMethod.POST)
+    @PostMapping(path = "/edit/{id}")
     public String edit2(@ModelAttribute Note note, @PathVariable Long id) {
         try {
             NoteValidator.validateTitle(note.getTitle());
